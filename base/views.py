@@ -6,6 +6,8 @@ from .models import Sale
 from django.db.models import Sum
 from django.views.decorators.csrf import csrf_protect
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 
 @csrf_protect
@@ -17,6 +19,7 @@ def home(request):
         )
 
         if sale is not None:
+            messages.success(request, 'Sale amount added successfully!')
             return redirect('home')
     return render(request, 'home.html')
 
@@ -33,11 +36,16 @@ def login_view(request):
             messages.error(request, "Invalid username or password")
     return render(request, 'login.html')
 
-from django.shortcuts import render
-from django.utils.dateparse import parse_date
+
+
+
+
+
+
 
 
 @csrf_protect
+@login_required
 def admin_view(request):
     sales_list = Sale.objects.all().order_by('-createdAt')
 

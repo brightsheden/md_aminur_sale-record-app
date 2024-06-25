@@ -13,6 +13,18 @@
   <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-2xl font-bold mb-6 text-center">Add Sale Amount</h2>
+      
+      <!-- Display messages -->
+      {% if messages %}
+      <div class="mb-4">
+        {% for message in messages %}
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
       <form method="post">
         {% csrf_token %}
         <div class="mb-4">
